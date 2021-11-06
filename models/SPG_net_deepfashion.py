@@ -251,8 +251,7 @@ class ACE(nn.Module):
     def forward(self, x, segmap, style_codes=None, obj_dic=None):
 
         # Part 1. generate parameter-free normalized activations
-        # added_noise = (torch.randn(x.shape[0], x.shape[3], x.shape[2], 1).cuda() * self.noise_var).transpose(1, 3)
-        added_noise = (torch.randn(x.shape[0], x.shape[3], x.shape[2], 1) * self.noise_var).transpose(1, 3)
+        added_noise = (torch.randn(x.shape[0], x.shape[3], x.shape[2], 1).cuda() * self.noise_var).transpose(1, 3)
         normalized = self.param_free_norm(x+added_noise)
 
         # Part 2. produce scaling and bias conditioned on semantic map
@@ -548,8 +547,7 @@ class DualUnetGenerator_SEAN(nn.Module):
             self.nc_cihp_dec = self.nc_cihp + 12
         else:
             # print('****')
-            # self.alpha = torch.Tensor([-0.1]).cuda()
-            self.alpha = torch.Tensor([-0.1])
+            self.alpha = torch.Tensor([-0.1]).cuda()
             self.nc_cihp_dec = self.nc_cihp
 
         if norm == 'batch':
